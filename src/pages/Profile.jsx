@@ -1,6 +1,7 @@
 import "../styles/profile.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const cardHover = {
   whileHover: { y: -4, scale: 1.01 },
@@ -8,6 +9,8 @@ const cardHover = {
 };
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [editOpen, setEditOpen] = useState(false);
 
   const [name, setName] = useState("Aspirant");
@@ -16,9 +19,23 @@ const Profile = () => {
   const [bio, setBio] = useState("Passionate about building real products.");
   const [avatar, setAvatar] = useState(null);
 
+  const [github, setGithub] = useState("");
+  const [leetcode, setLeetcode] = useState("");
+
   const modalRef = useRef();
 
-  // Close modal on outside click
+  // Load saved data
+  useEffect(() => {
+    const gh = localStorage.getItem("github");
+    const lc = localStorage.getItem("leetcode");
+    const n = localStorage.getItem("profileName");
+
+    if (gh) setGithub(gh);
+    if (lc) setLeetcode(lc);
+    if (n) setName(n);
+  }, []);
+
+  // Close modal outside click
   useEffect(() => {
     const handler = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -29,7 +46,7 @@ const Profile = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  // Close modal on ESC
+  // ESC close
   useEffect(() => {
     const escHandler = (e) => {
       if (e.key === "Escape") setEditOpen(false);
@@ -44,6 +61,21 @@ const Profile = () => {
       const preview = URL.createObjectURL(file);
       setAvatar(preview);
     }
+  };
+
+  // SAVE PROFILE
+  const handleSave = () => {
+    localStorage.setItem("github", github);
+    localStorage.setItem("leetcode", leetcode);
+    localStorage.setItem("profileName", name);
+
+    setEditOpen(false);
+  };
+
+  // LOGOUT
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (
@@ -176,8 +208,9 @@ const Profile = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <button className="footer-btn">Account Settings</button>
-        <button className="footer-btn logout">Logout</button>
+        <button className="footer-btn logout" onClick={logout}>
+          Logout
+        </button>
       </motion.div>
 
       {/* MODAL */}
@@ -206,8 +239,22 @@ const Profile = () => {
               />
               <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
 
+              {/* NEW INPUTS */}
+              <input
+                placeholder="GitHub Username"
+                value={github}
+                onChange={(e) => setGithub(e.target.value)}
+              />
+
+              <input
+                placeholder="LeetCode Username"
+                value={leetcode}
+                onChange={(e) => setLeetcode(e.target.value)}
+              />
+
               <div className="modal-actions">
-                <button onClick={() => setEditOpen(false)}>Save</button>
+                <button onClick={handleSave}>Save</button>
+
                 <button className="cancel" onClick={() => setEditOpen(false)}>
                   Cancel
                 </button>

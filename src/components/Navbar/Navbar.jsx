@@ -9,7 +9,6 @@ const Navbar = () => {
   const [profileOpen, setProfileOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Click outside to close dropdown
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -23,75 +22,52 @@ const Navbar = () => {
 
   return (
     <nav className="pro-navbar">
-      {/* Left */}
+      {/* Logo */}
+
       <div className="nav-left">
         <span className="logo-icon">📊</span>
         <span className="logo-text">DevProgress</span>
       </div>
 
-      {/* Center */}
+      {/* Navigation */}
+
       <ul className={`nav-links ${open ? "show" : ""}`}>
         <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            🏠 Dashboard
-          </NavLink>
+          <NavLink to="/after-login">🏠 Dashboard</NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/growth"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            📈 Your Growth
-          </NavLink>
+          <NavLink to="/growth">📈 Your Growth</NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/projects"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            🗂 Projects
-          </NavLink>
+          <NavLink to="/projects">🗂 Projects</NavLink>
         </li>
 
         <li>
-          <NavLink
-            to="/certificates"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            🏆 Certificates
-          </NavLink>
-        </li>
-
-        <li>
-          <NavLink
-            to="/reminders"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            🔔 Reminders
-          </NavLink>
+          <NavLink to="/certificates">🏆 Certificates</NavLink>
         </li>
       </ul>
 
-      {/* Right */}
+      {/* Right Section */}
+
       <div className="nav-right">
         {/* Search */}
+
         <div className="nav-search">
           <input type="text" placeholder="Search..." />
           <button>🔍</button>
         </div>
 
         {/* Notification */}
+
         <div className="notif-icon">
           🔔
           <span className="notif-badge">3</span>
         </div>
 
         {/* Profile */}
+
         <div className="profile-wrapper" ref={dropdownRef}>
           <img
             src="https://i.pravatar.cc/40"
@@ -104,14 +80,22 @@ const Navbar = () => {
             <p onClick={() => navigate("/profile")}>👤 Profile</p>
 
             <p onClick={() => navigate("/settings")}>⚙ Settings</p>
-            <p onClick={() => navigate("/login")}>🔐 Login</p>
-            <p onClick={() => navigate("/after-login")}>🔐 AfterLogin</p>
 
-            <p>🚪 Logout</p>
+            <p onClick={() => navigate("/after-login")}>📊 Dashboard</p>
+
+            <p
+              onClick={() => {
+                localStorage.removeItem("token");
+                navigate("/login");
+              }}
+            >
+              🚪 Logout
+            </p>
           </div>
         </div>
 
         {/* Hamburger */}
+
         <div className="hamburger" onClick={() => setOpen(!open)}>
           ☰
         </div>

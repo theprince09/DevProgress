@@ -11,6 +11,8 @@ import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import AfterLoginDashboard from "./pages/AfterLoginDashboard";
 import Growth from "./pages/Growth";
+import Projects from "./pages/Projects";
+import Certificates from "./pages/Certificates";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -28,13 +30,24 @@ function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
 
-          {/* Protected Pages */}
+          {/* Protected Dashboard */}
 
           <Route
             path="/after-login"
             element={
               <ProtectedRoute>
                 <AfterLoginDashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Protected Pages */}
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />
@@ -49,19 +62,28 @@ function App() {
           />
 
           <Route
-            path="/profile"
+            path="/settings"
             element={
               <ProtectedRoute>
-                <Profile />
+                <Settings />
               </ProtectedRoute>
             }
           />
 
           <Route
-            path="/settings"
+            path="/projects"
             element={
               <ProtectedRoute>
-                <Settings />
+                <Projects />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/certificates"
+            element={
+              <ProtectedRoute>
+                <Certificates />
               </ProtectedRoute>
             }
           />
