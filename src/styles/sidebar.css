@@ -60,10 +60,12 @@
     opacity: 1;
 }
 
-.dp-nav .active {
-    color: #ff2d2d;
-    background: rgba(255, 0, 0, 0.15);
-    opacity: 1;
+.dp-nav a.active {
+    color: #ff2d2d !important;
+    background: rgba(255, 0, 0, 0.2);
+    opacity: 1 !important;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(255, 45, 45, 0.4);
 }
 
 /* PROGRESS BOX */
@@ -78,7 +80,9 @@
 
     text-align: center;
 }
-
+.frm-btm{
+    margin-top: 100px;
+}
 /* PROGRESS RING */
 
 .dp-ring {

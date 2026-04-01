@@ -40,35 +40,35 @@ const Sidebar = ({ githubStats, profileName, githubUser, logout }) => {
       </nav>
 
       {/* Career Progress */}
+      <div className="frm-btm">
+        <div className="dp-progress-box">
+          <div className="dp-ring">
+            <svg>
+              <circle cx="45" cy="45" r="40"></circle>
+              <circle cx="45" cy="45" r="40" className="progress"></circle>
+            </svg>
 
-      <div className="dp-progress-box">
-        <div className="dp-ring">
-          <svg>
-            <circle cx="45" cy="45" r="40"></circle>
-            <circle cx="45" cy="45" r="40" className="progress"></circle>
-          </svg>
+            <span>80%</span>
+          </div>
 
-          <span>80%</span>
+          <p>Career Progress</p>
         </div>
 
-        <p>Career Progress</p>
-      </div>
+        {/* User */}
 
-      {/* User */}
+        <div className="dp-user-mini">
+          {githubStats?.avatar_url ? (
+            <img src={githubStats.avatar_url} className="avatar" />
+          ) : (
+            <div className="avatar"></div>
+          )}
 
-      <div className="dp-user-mini">
-        {githubStats?.avatar_url ? (
-          <img src={githubStats.avatar_url} className="avatar" />
-        ) : (
-          <div className="avatar"></div>
-        )}
-
-        <div>
-          <h4>{profileName}</h4>
-          <p>{githubUser}</p>
+          <div className="Profile-name">
+            <h4>{profileName}</h4>
+            <p>{githubUser}</p>
+          </div>
         </div>
       </div>
-
       <button className="dp-logout" onClick={logout}>
         Logout
       </button>
