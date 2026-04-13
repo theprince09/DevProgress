@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+<<<<<<< HEAD
+@tailwind utilities;
+/* Sidebar removed — all pages full width */
+.dp-root {
+  display: block !important;
+}
+
+.dp-main {
+  margin-left: 0 !important;
+  padding-top: 84px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+  max-width: 1200px;
+  margin: 0 auto !important;
+}
+
+/* Growth page */
+.gr-root {
+  padding-top: 84px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+=======
+@tailwind utilities;
+>>>>>>> 2ad728cdf6c885c03d2912149663f3f15f2560d1
